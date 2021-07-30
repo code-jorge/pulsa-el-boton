@@ -12,8 +12,23 @@ const getSource = state=> {
   if (state === 'pressed') return buttonPressed
 }
 
-const Button = ({ state='closed', onClick=noop })=> (
-  <div className={styles.main} onClick={onClick}>
+const Button = ({ 
+  state='closed', 
+  onClick=noop,
+  onMouseEnter=noop,
+  onMouseLeave=noop,
+  onMouseDown=noop,
+  onMouseUp=noop
+
+})=> (
+  <div 
+    className={styles.main} 
+    onClick={onClick}
+    onMouseEnter={onMouseEnter}
+    onMouseLeave={onMouseLeave}
+    onMouseDown={onMouseDown}
+    onMouseUp={onMouseUp}    
+  >
     <img 
       className={styles.button}
       src={getSource(state)} 
