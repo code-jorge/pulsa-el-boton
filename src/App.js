@@ -1,25 +1,19 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import { Switch } from 'react-router'
+import { Route } from 'react-router-dom'
+import Layout from './layout/Layout/Layout'
+import Dilemma from './views/Dilemma/Dilemma'
+import DilemmaList from './views/DilemmaList/DilemmaList'
+import Statistics from './views/Statistics/Statistics'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+const App = ()=> (
+  <Layout>
+    <Switch>
+      <Route exact path='/dilema/:slug' component={Dilemma} />
+      <Route exact path='/estadisticas/:slug' component={Statistics} />
+      <Route exact path='/dilemas' component={DilemmaList} />
+    </Switch>
+  </Layout>
+)
 
-export default App;
+export default App
