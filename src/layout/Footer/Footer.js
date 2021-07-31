@@ -15,7 +15,11 @@ const Twitter = ({ className })=> (
 
 const Footer = ()=> (
   <footer className={styles.footer}>
-    <p className={styles.title}>Pulsa el botón</p>
+    <p className={styles.title}>
+      Pulsa
+      <br />
+      el botón
+    </p>
     <div className={styles.links}>
       <a 
         className={styles.link}

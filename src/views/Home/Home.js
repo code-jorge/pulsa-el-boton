@@ -8,8 +8,8 @@ import styles from './Home.module.css'
 
 const Home = ()=> {
 
-  const { isLoading, isError, data } = useQuery('dilemmas-latest', getLatestDilemma)
   const history = useHistory()
+  const { isLoading, isError, data } = useQuery('dilemmas-latest', getLatestDilemma)
   const [buttonState, setButtonState] = useState('closed')
 
   return (

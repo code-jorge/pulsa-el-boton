@@ -8,6 +8,6 @@ exports.handler = async (event, context)=> {
   const data = await db.collection("dilemmas").find({}).limit(PAGE_SIZE).skip(PAGE_SIZE*(page-1))
   return {
     statusCode: 200,
-    body: JSON.stringify({ data })
+    body: JSON.stringify({ dilemmas: data })
   }
 }

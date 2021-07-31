@@ -5,6 +5,6 @@ exports.handler = async (event, context)=> {
   const [ dilemma ] = await db.collection("dilemmas").find({}).sort({ _id: -1 }).limit(1).toArray()
   return {
     statusCode: 200,
-    body: JSON.stringify({ dilemma })
+    body: JSON.stringify(dilemma)
   }
 }
