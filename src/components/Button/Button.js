@@ -3,17 +3,20 @@ import styles from './Button.module.css'
 import buttonClosed from './assets/button--closed.svg'
 import buttonOpened from './assets/button--opened.svg'
 import buttonPressed from './assets/button--pressed.svg'
+import buttonElement from './assets/button--element.svg'
 
 const noop = ()=> {}
 
-const getSource = state=> {
-  if (state === 'closed') return buttonClosed
-  if (state === 'opened') return buttonOpened
-  if (state === 'pressed') return buttonPressed
+const getSource = type=> {
+  if (type === 'closed') return buttonClosed
+  if (type === 'opened') return buttonOpened
+  if (type === 'pressed') return buttonPressed
+  if (type === 'element') return buttonElement
 }
 
 const Button = ({ 
-  state='closed', 
+  className,
+  type='closed', 
   onClick=noop,
   onMouseEnter=noop,
   onMouseLeave=noop,
@@ -22,7 +25,7 @@ const Button = ({
 
 })=> (
   <div 
-    className={styles.main} 
+    className={`${styles.main} ${className || ''}`} 
     onClick={onClick}
     onMouseEnter={onMouseEnter}
     onMouseLeave={onMouseLeave}
@@ -31,7 +34,7 @@ const Button = ({
   >
     <img 
       className={styles.button}
-      src={getSource(state)} 
+      src={getSource(type)} 
       alt='The button to press'
     />
   </div>

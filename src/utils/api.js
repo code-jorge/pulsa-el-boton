@@ -1,6 +1,13 @@
 export const getTotalDilemmas = ()=> {
-  const url = '/api/dilemmas-list'
+  const url = '/api/dilemmas-count'
   return fetch(url)
     .then(res=> res.json())
-    .then(res=> res.total)
+    .then(({ total })=> total)
+}
+
+export const getLatestDilemma = ()=> {
+  const url = '/api/dilemmas-latest'
+  return fetch(url)
+    .then(res=> res.json())
+    .then(({ dilemma })=> dilemma)
 }
