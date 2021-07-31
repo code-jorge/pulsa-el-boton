@@ -1,3 +1,7 @@
 .main {
-  padding-top: 70px;
+  padding-top: var(--height-header);
+  min-height: calc(100vh - var(--height-footer));
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }

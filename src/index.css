@@ -19,4 +19,7 @@ code {
 
 :root {
   --color-main: #121212;
+
+  --height-header: 70px;
+  --height-footer: 50px;
 }

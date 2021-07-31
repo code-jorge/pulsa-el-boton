@@ -1,0 +1,33 @@
+.loading {
+  height: 48px;
+  width: 48px;
+  color: #5a5a5a;
+  border-radius: 50%;
+  border: 5px solid;
+  position: relative;
+  display: inline-block; 
+}
+
+.loading::after {
+  content: '';
+  height: 25%;
+  width: 0;
+  border-radius: 5px;
+  border: 3px solid;
+  display: block;
+  color: inherit;
+  position: absolute;
+  left: 16px;
+  top: 4px;
+  transform-origin: bottom;
+  animation: rotate 1s linear infinite; 
+}
+
+@keyframes rotate {
+  0% {
+    transform: rotate(0); 
+  }
+  100% {
+    transform: rotate(360deg); 
+  } 
+}

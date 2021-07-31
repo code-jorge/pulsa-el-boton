@@ -1,7 +1,8 @@
 import React from 'react'
+import styles from './Loading.module.css'
 
 const Loading = ()=> (
-  <span>Now loading</span>
+  <div className={styles.loading} />
 )
 
 export default Loading

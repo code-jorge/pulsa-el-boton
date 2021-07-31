@@ -2,13 +2,15 @@
 
 ### Dilemma Structure
 
-| Field       | Type      | Meaning              |
-|-------------|-----------|----------------------|
-| id          | ObjectId  | The identifier       |
-| type        | string    | Type of dilemma      |
-| positive    | string    | Positive outcome     |
-| negative    | string    | Negative outcome     |
-| slug        | string    | URL Fragment         |
+| Field       | Type             | Meaning              |
+|-------------|------------------|----------------------|
+| id          | ObjectId         | The identifier       |
+| type        | string           | Type of dilemma      |
+| category    | string           | Category             |
+| tags        | Array<string>    | Tags                 |
+| positive    | string           | Positive outcome     |
+| negative    | string           | Negative outcome     |
+| slug        | string           | URL Fragment         |
 
 ### Create React App
 
