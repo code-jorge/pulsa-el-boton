@@ -28,9 +28,9 @@ const Dilemma = ()=> {
       loading={[isLoading, submitVote.isLoading]} 
       errors={[isError, submitVote.isError]}
     >
-      <p>{data.positive}</p>
+      <p>{data && data.positive}</p>
       <p>pero</p>
-      <p>{data.negative}</p>
+      <p>{data && data.negative}</p>
       <Button 
         className={styles.button}
         type={buttonState}
