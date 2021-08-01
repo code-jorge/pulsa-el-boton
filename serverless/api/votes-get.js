@@ -12,6 +12,9 @@ exports.handler = async (event, context)=> {
   const totals = await Promise.all(vote_totals)
   return {
     statusCode: 200,
-    body: JSON.stringify({ totals })
+    body: JSON.stringify({ 
+      type: dilemma.type, 
+      totals 
+    })
   }
 }

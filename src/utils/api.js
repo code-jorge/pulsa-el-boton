@@ -7,14 +7,22 @@ export const getTotalDilemmas = ()=> {
 
 export const getDilemma = (slug)=> {
   const url = `/api/dilemmas-get?slug=${slug}`
-  return fetch(url)
-    .then(res=> res.json())
+  return fetch(url).then(res=> res.json())
+}
+
+export const getNextDilemma = (slug)=> {
+  const url = `/api/dilemmas-next?slug=${slug}`
+  return fetch(url).then(res=> res.json())
 }
 
 export const getLatestDilemma = ()=> {
   const url = '/api/dilemmas-latest'
-  return fetch(url)
-    .then(res=> res.json())
+  return fetch(url).then(res=> res.json())
+}
+
+export const getVotes = (slug)=> {
+  const url = `/api/votes-get?slug=${slug}`
+  return fetch(url).then(res=> res.json())
 }
 
 export const addVote = ({ choice, dilemma })=> {
