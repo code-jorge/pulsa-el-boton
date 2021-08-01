@@ -1,5 +1,70 @@
 .button {
   width: 300px;
   height: 300px;
+  max-width: 60%;
+  max-height: 50vh;
   cursor: pointer;
+  align-self: center;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  margin: 30px 0;
+}
+
+.positive,
+.negative {
+  font-weight: 200;
+  font-size: 14px;
+  border: 1px solid var(--color-main);
+  border-radius: 12px;
+  padding: 26px 16px;
+  width: 90%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.choice {
+  margin: 20px 0;
+}
+
+.separator {
+  font-weight: 200;
+  font-style: italic;
+  text-align: center;
+  width: 90%;
+  max-width: 800px;
+  margin: 25px auto;
+}
+
+.avoid {
+  margin-top: 35px;
+  display: flex;    
+  width: 90%;
+  max-width: 800px;
+  margin: 30px auto 0;
+  align-items: center;
+  font-weight: 200;
+  justify-content: flex-end;
+}
+
+.arrow {
+  width: 60px;
+  height: 35px;
+  transform: rotate(72deg);
+}
+
+.cancelButton {
+  cursor: pointer;
+  background: transparent;
+  border: none;
+  width: 40px;
+  height: 40px;
+}
+
+.cancel:hover {
+  fill: var(--color-main);
 }

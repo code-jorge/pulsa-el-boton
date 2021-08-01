@@ -26,5 +26,4 @@ export const addVote = ({ choice, dilemma })=> {
     },
     body: JSON.stringify({ choice, dilemma })
   })
-    .then(res=> res.json())
 }

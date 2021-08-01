@@ -1,24 +1,24 @@
 .loading {
   height: 48px;
   width: 48px;
-  color: #5a5a5a;
+  color: var(--color-main);
   border-radius: 50%;
-  border: 5px solid;
+  border: 2px solid;
   position: relative;
   display: inline-block; 
 }
 
 .loading::after {
   content: '';
-  height: 25%;
+  height: 35%;
   width: 0;
   border-radius: 5px;
-  border: 3px solid;
+  border: 1px solid;
   display: block;
   color: inherit;
   position: absolute;
-  left: 16px;
-  top: 4px;
+  left: 20px;
+  top: 5.5px;
   transform-origin: bottom;
   animation: rotate 1s linear infinite; 
 }
