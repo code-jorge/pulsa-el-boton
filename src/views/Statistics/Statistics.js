@@ -4,6 +4,7 @@ import { useHistory, useParams } from 'react-router-dom'
 import PageContent from '../../layout/PageContent/PageContent'
 import { getNextDilemma, getVotes } from '../../utils/api'
 import styles from './Statistics.module.css'
+import { formatTotals, getCoverage } from './utils'
 
 const Statistics = ()=> {
 
@@ -22,6 +23,29 @@ const Statistics = ()=> {
     data: nextData 
   } = useQuery([ 'dilemma', slug ], ()=> getNextDilemma(slug))
 
+
+  const StatisticsShowClassic = ({ totals })=> (
+    <div className={styles.classic}>
+      <p className={styles.positive}>
+        Un total de {totals.YES} personas pulsaron el botón
+      </p>
+      <div 
+        className={styles.bar} 
+        style={{ background: `linear-gradient(90deg, var(--color-main) 0%, var(--color-main) ${getCoverage(totals)}%, white ${getCoverage(totals)}% )`}}
+      >
+        <p className={styles.barTotal}>{Math.round(getCoverage(totals))}%</p>
+      </div>
+      <p className={styles.negative}>
+        Un total de {totals.NO} personas no pulsaron el botón
+      </p>
+    </div>
+  )
+
+  const StatisticsShow = ({ type, totals })=> {
+    if (type === 'classic') return <StatisticsShowClassic totals={formatTotals(totals)} />
+    return null
+  }
+
   const handleClick = ()=> history.push(`/dilema/${nextData.slug}`)
 
   return (
@@ -30,13 +54,16 @@ const Statistics = ()=> {
       errors={[isStatsError, isNextError]}
     >
       <div className={styles.result}>
-        {statsData && statsData.totals.map(({vote, total})=> (
-          <p key={vote}>Un total de {total} personas votaron {vote}</p>
-        ))}
+        {statsData && (
+          <StatisticsShow 
+            type={statsData.type} 
+            totals={statsData.totals} 
+          />
+        )}
+        <button onClick={handleClick}>
+          Siguiente
+        </button>
       </div>
-      <button onClick={handleClick}>
-        Siguiente
-      </button>
     </PageContent>
   )
 
