@@ -46,7 +46,10 @@ const Statistics = ()=> {
     return null
   }
 
-  const handleClick = ()=> history.push(`/dilema/${nextData.slug}`)
+  const handleClick = ()=> {
+    if (nextData.end) history.push(`/final`)
+    else history.push(`/dilema/${nextData.slug}`)
+  }
 
   return (
     <PageContent 
@@ -60,7 +63,7 @@ const Statistics = ()=> {
             totals={statsData.totals} 
           />
         )}
-        <button onClick={handleClick}>
+        <button className={styles.button} onClick={handleClick}>
           Siguiente
         </button>
       </div>

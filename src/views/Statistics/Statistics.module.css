@@ -34,3 +34,20 @@
   font-weight: 200;
   margin-top: 6px;
 }
+
+.button {
+  background: transparent;
+  border: 1px solid var(--color-main);
+  border-radius: 4px;
+  padding: 20px 48px;
+  font-size: 22px;
+  margin-top: 150px;
+  text-transform: uppercase;
+  font-weight: 200;
+  cursor: pointer;
+}
+
+.button:hover {
+  border-color: #c2c2c2;
+  color: #c2c2c2;
+}
