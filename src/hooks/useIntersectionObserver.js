@@ -18,5 +18,5 @@ export default function useIntersectionObserver({
     if (!element) return noop;
     observer.observe(element);
     return () => observer.unobserve(element);
-  }, [target.current, enabled]);
+  }, [target, enabled, onIntersect, threshold]);
 }
