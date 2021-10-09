@@ -5,6 +5,8 @@
 | Field       | Type             | Meaning              |
 |-------------|------------------|----------------------|
 | id          | ObjectId         | The identifier       |
+| date        | Date             | The date             |
+| title       | string           | The title            |
 | type        | string           | Type of dilemma      |
 | category    | string           | Category             |
 | tags        | Array<string>    | Tags                 |
@@ -13,7 +15,7 @@
 | slug        | string           | URL Fragment         |
 
 
-### Dilemma vote structure
+### Dilemma vote structure
 
 | Field       | Type             | Meaning              |
 |-------------|------------------|----------------------|

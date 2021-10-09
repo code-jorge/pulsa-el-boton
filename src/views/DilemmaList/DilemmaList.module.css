@@ -1,0 +1,14 @@
+.dilemmas {
+  margin: 20px auto;
+}
+
+.dilemma {
+  border: 1px solid var(--color-main);
+  border-radius: 4px;
+  padding: 12px 20px;
+  margin: 10px 0;
+}
+
+.end {
+  margin-top: 20px;
+}

@@ -5,6 +5,11 @@ export const getTotalDilemmas = ()=> {
     .then(({ total })=> total)
 }
 
+export const getDilemmasList = (page)=> {
+  const url = `/api/dilemmas-list?page=${page}`
+  return fetch(url).then(res=> res.json())
+}
+
 export const getDilemma = (slug)=> {
   const url = `/api/dilemmas-get?slug=${slug}`
   return fetch(url).then(res=> res.json())
