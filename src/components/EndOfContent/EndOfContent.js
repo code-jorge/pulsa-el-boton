@@ -11,13 +11,22 @@ const EndOfContent = ({
 
   if (isError) {
     return (
-      <p>Ha habido un error con al recuperar los dilemas!</p>
+      <p className={styles.message}>
+        ¡Ha habido un error al recuperar los dilemas!
+        <button 
+          type='button' 
+          className={styles.retry} 
+          onClick={onClick}
+        >
+          Reintentar
+        </button>
+      </p>
     );
   }
   if (isLoading) return <Loading />;
   if (isEnd) {
     return (
-      <p>Todavía no hay más dilemas!</p>
+      <p className={styles.message}>¡Ya está! Estos son todos de momento</p>
     );
   }
   return (

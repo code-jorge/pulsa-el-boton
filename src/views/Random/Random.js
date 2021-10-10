@@ -10,7 +10,7 @@ const Random = ()=> {
 
   const history = useHistory()
 
-  const { isLoading, isError, data } = useQuery([ 'dilemma-random' ], ()=> getDilemmaRandom())
+  const { isError, data } = useQuery([ 'dilemma-random' ], ()=> getDilemmaRandom())
 
   useEffect(()=> {
     if (data && data.slug) history.push(`/dilema/${data.slug}`)
@@ -18,7 +18,7 @@ const Random = ()=> {
 
   return (
     <PageContent 
-      loading={[isLoading]} 
+      loading={[true]} 
       errors={[isError]}
     />
   )

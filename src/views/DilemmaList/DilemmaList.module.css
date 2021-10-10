@@ -1,3 +1,16 @@
+.main {
+  width: 90%;
+  max-width: 800px;
+}
+
+.title {
+  color: var(--color-main);
+  text-align: center;
+  font-size: 24px;
+  font-weight: 300;
+  margin-bottom: 30px;
+}
+
 .dilemmas {
   margin: 20px auto;
 }
@@ -7,16 +20,20 @@
   border-radius: 4px;
   padding: 12px 20px;
   margin: 10px 0;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 }
 
 .image {
   width: 30px;
   height: 30px;
-  margin-left: 20px;
+  margin-right: 20px;
 }
 
 .title {
   color: var(--color-main);
+  text-decoration: none;
 }
 
 .end {

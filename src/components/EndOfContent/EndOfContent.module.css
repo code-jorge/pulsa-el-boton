@@ -4,3 +4,15 @@
   cursor: pointer;
   align-self: center;
 }
+
+.retry {
+  border: none;
+  text-decoration: underline;
+  background-color: transparent;
+  cursor: pointer;
+}
+
+.message {
+  margin-top: 35px;
+  color: var(--color-main);
+}

@@ -46,7 +46,7 @@ const DilemmaList = ()=> {
   return (
     <PageContent loading={[isLoading]} errors={[isError]}>
       <div className={style.main}>
-        <p>Total dilemas: {total}</p>
+        <p className={style.title} >Hay {total} dilemas</p>
         <div className={style.dilemmas}>
           {dilemmas.map(dilemma=> (
             <Link to={`/dilema/${dilemma.slug}`} key={dilemma._id}>
