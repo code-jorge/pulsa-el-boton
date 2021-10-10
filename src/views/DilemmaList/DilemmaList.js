@@ -8,6 +8,7 @@ import { getDilemmasList, getTotalDilemmas } from '../../utils/api'
 import { PAGE_SIZE } from '../../utils/constants'
 import { processDilemmaPages } from '../../utils/dilemmas'
 import styles from './DilemmaList.module.css'
+import Button from '../../components/Button/Button'
 
 const DilemmaList = ()=> {
 
