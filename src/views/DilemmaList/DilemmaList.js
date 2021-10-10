@@ -7,6 +7,7 @@ import PageContent from '../../layout/PageContent/PageContent'
 import { getDilemmasList, getTotalDilemmas } from '../../utils/api'
 import { PAGE_SIZE } from '../../utils/constants'
 import { processDilemmaPages } from '../../utils/dilemmas'
+import buttonImage from '../../components/Button/assets/button--closed.svg'
 import style from './DilemmaList.module.css'
 
 const DilemmaList = ()=> {
@@ -48,11 +49,12 @@ const DilemmaList = ()=> {
         <p>Total dilemas: {total}</p>
         <div className={style.dilemmas}>
           {dilemmas.map(dilemma=> (
-            <div className={style.dilemma} key={dilemma._id}>
-              <Link to={`/dilema/${dilemma.slug}`}>
-                {dilemma.title}
-              </Link>
-            </div>
+            <Link to={`/dilema/${dilemma.slug}`} key={dilemma._id}>
+              <div className={style.dilemma}>
+                <img className={style.image} src={buttonImage} alt={dilemma.title} />
+                <p className={style.title}>{dilemma.title}</p>
+              </div>
+            </Link>
           ))}
         </div>
         <div className={style.end} ref={loadNextRef}>

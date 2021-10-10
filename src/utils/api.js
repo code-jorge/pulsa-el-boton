@@ -15,6 +15,11 @@ export const getDilemma = (slug)=> {
   return fetch(url).then(res=> res.json())
 }
 
+export const getDilemmaRandom = ()=> {
+  const url = `/api/dilemmas-get-random`
+  return fetch(url).then(res=> res.json())
+}
+
 export const getNextDilemma = (slug)=> {
   const url = `/api/dilemmas-next?slug=${slug}`
   return fetch(url).then(res=> res.json())

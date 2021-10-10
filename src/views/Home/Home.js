@@ -14,16 +14,18 @@ const Home = ()=> {
 
   return (
     <PageContent loading={[isLoading]} errors={[isError]}>
-      <p>Pulsa el botón para empezar</p>
-      <Button 
-        className={styles.button}
-        type={buttonState}
-        onMouseEnter={()=> setButtonState('opened')}
-        onMouseLeave={()=> setButtonState('closed')}
-        onMouseDown={()=> setButtonState('pressed')}
-        onMouseUp={()=> setButtonState('opened')}
-        onClick={()=> history.push(`/dilema/${data.slug}`)}
-      />
+      <div className={styles.main}>
+        <p className={styles.title}>Pulsa el botón para empezar</p>
+        <Button 
+          className={styles.button}
+          type={buttonState}
+          onMouseEnter={()=> setButtonState('opened')}
+          onMouseLeave={()=> setButtonState('closed')}
+          onMouseDown={()=> setButtonState('pressed')}
+          onMouseUp={()=> setButtonState('opened')}
+          onClick={()=> history.push(`/dilema/${data.slug}`)}
+        />
+      </div>
     </PageContent>
   )
 }
