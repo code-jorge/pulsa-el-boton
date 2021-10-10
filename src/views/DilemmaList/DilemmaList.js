@@ -7,8 +7,7 @@ import PageContent from '../../layout/PageContent/PageContent'
 import { getDilemmasList, getTotalDilemmas } from '../../utils/api'
 import { PAGE_SIZE } from '../../utils/constants'
 import { processDilemmaPages } from '../../utils/dilemmas'
-import buttonImage from '../../components/Button/assets/button--closed.svg'
-import style from './DilemmaList.module.css'
+import styles from './DilemmaList.module.css'
 
 const DilemmaList = ()=> {
 
@@ -45,19 +44,19 @@ const DilemmaList = ()=> {
 
   return (
     <PageContent loading={[isLoading]} errors={[isError]}>
-      <div className={style.main}>
-        <p className={style.title} >Hay {total} dilemas</p>
-        <div className={style.dilemmas}>
+      <div className={styles.main}>
+        <p className={styles.title} >Hay {total} dilemas</p>
+        <div className={styles.dilemmas}>
           {dilemmas.map(dilemma=> (
-            <Link to={`/dilema/${dilemma.slug}`} key={dilemma._id}>
-              <div className={style.dilemma}>
-                <img className={style.image} src={buttonImage} alt={dilemma.title} />
-                <p className={style.dilemmaTitle}>{dilemma.title}</p>
+            <Link className={styles.link} to={`/dilema/${dilemma.slug}`} key={dilemma._id}>
+              <div className={styles.dilemma}>
+                <Button className={styles.image} type='element' />
+                <p className={styles.dilemmaTitle}>{dilemma.title}</p>
               </div>
             </Link>
           ))}
         </div>
-        <div className={style.end} ref={loadNextRef}>
+        <div className={styles.end} ref={loadNextRef}>
           <EndOfContent
             isError={false}
             isLoading={isFetching || isFetchingNextPage}

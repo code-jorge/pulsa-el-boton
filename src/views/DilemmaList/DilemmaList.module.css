@@ -15,6 +15,10 @@
   margin: 20px auto;
 }
 
+.link {
+  text-decoration: none;
+}
+
 .dilemma {
   border: 1px solid var(--color-main);
   border-radius: 4px;
@@ -37,5 +41,8 @@
 }
 
 .end {
-  margin-top: 20px;
+  margin-top: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
