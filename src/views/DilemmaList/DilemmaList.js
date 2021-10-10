@@ -52,7 +52,7 @@ const DilemmaList = ()=> {
             <Link to={`/dilema/${dilemma.slug}`} key={dilemma._id}>
               <div className={style.dilemma}>
                 <img className={style.image} src={buttonImage} alt={dilemma.title} />
-                <p className={style.title}>{dilemma.title}</p>
+                <p className={style.dilemmaTitle}>{dilemma.title}</p>
               </div>
             </Link>
           ))}
