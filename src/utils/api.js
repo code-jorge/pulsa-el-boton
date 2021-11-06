@@ -45,3 +45,14 @@ export const addVote = ({ choice, dilemma })=> {
     body: JSON.stringify({ choice, dilemma })
   })
 }
+
+export const addDilemma = (dilemma)=> {
+  const url = '/api/dilemmas-add'
+  return fetch(url, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(dilemma)
+  })
+}

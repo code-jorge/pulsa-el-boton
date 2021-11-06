@@ -10,7 +10,5 @@ exports.handler = async (event, context)=> {
     ip,
     date: new Date()
   })
-  return {
-    statusCode: 200,
-  }
+  return { statusCode: 200 }
 }

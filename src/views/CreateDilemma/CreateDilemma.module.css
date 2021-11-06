@@ -1,0 +1,26 @@
+.main {
+  display: flex;
+  flex-direction: column;
+  margin: 50px 0;
+  width: 90%;
+  max-width: 800px;
+}
+
+.section {
+  display: flex;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: space-between;
+}
+
+.section>* {
+  flex-basis: calc(50% - 10px);
+  margin: 10px 0;
+}
+
+.button {
+  cursor: pointer;
+  width: 250px;
+  height: 250px;
+  margin: 30px auto 10px;
+}

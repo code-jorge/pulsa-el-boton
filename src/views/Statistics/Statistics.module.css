@@ -48,6 +48,6 @@
 }
 
 .button:hover {
-  border-color: #c2c2c2;
-  color: #c2c2c2;
+  border-color: var(--color-secondary);
+  color: var(--color-secondary);
 }

@@ -19,6 +19,7 @@ code {
 
 :root {
   --color-main: #121212;
+  --color-secondary: #c2c2c2;
 
   --height-header: 70px;
   --height-footer: 50px;
