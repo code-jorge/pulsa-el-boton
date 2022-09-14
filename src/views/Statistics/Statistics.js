@@ -27,7 +27,7 @@ const Statistics = ()=> {
   const StatisticsShowClassic = ({ totals })=> (
     <div className={styles.classic}>
       <p className={styles.positive}>
-        Un total de {totals.YES} personas pulsaron el botón
+        Un total de {totals.YES || '0'} personas pulsaron el botón
       </p>
       <div 
         className={styles.bar} 
@@ -36,7 +36,7 @@ const Statistics = ()=> {
         <p className={styles.barTotal}>{Math.round(getCoverage(totals))}%</p>
       </div>
       <p className={styles.negative}>
-        Un total de {totals.NO} personas no pulsaron el botón
+        Un total de {totals.NO || '0'} personas no pulsaron el botón
       </p>
     </div>
   )

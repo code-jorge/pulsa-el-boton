@@ -5,7 +5,13 @@ export const DILEMMA_TYPES = [
 ]
 
 export const DILEMMA_CATEGORIES = [
-  { label: 'Dinero', value: 'dinero' },
   { label: 'Amor', value: 'amor' },
+  { label: 'Animales', value: 'animales' },
+  { label: 'Ciencia', value: 'ciencia' },
+  { label: 'Deportes', value: 'deportes' },
+  { label: 'Dinero', value: 'dinero' },
+  { label: 'Familia', value: 'familia' },
   { label: 'Superpoderes', value: 'superpoderes' },
+  { label: 'Trabajo', value: 'trabajo' },
+  { label: 'Viajes', value: 'viajes' },
 ]
