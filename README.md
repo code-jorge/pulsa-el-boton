@@ -1,7 +1,5 @@
 ## Pulsa El Botón
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/dde074c6-d75f-4468-8475-20556f9abcc1/deploy-status)](https://app.netlify.com/sites/pulsa-el-boton/deploys)
-
 ### Dilemma Structure
 
 | Field       | Type             | Meaning              |
