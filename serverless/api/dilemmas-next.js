@@ -1,22 +1,23 @@
-const connect = require('../utils/connect')
+const { dilemmasStore, listAllDilemmas, sortedByDateDesc, visibleDilemmas } = require('../utils/store')
 
-exports.handler = async (event, context)=> {
-  const db = await connect()
-  const { slug } = event.queryStringParameters
-  const now = new Date()
-  const dilemma = await db.collection("dilemmas").findOne({ slug, date: { $lte: now } })
-  const next_dilemma = await db.collection("dilemmas")
-    .find({ date: { $lt: dilemma.date } })
-    .sort({ date: -1 })
-    .limit(1)
-    .toArray()
-  const next = next_dilemma.length === 0 ? '' : next_dilemma[0]
-  if (!next) return { 
-    statusCode: 200, 
-    body: JSON.stringify({ end: true })
+exports.handler = async (event) => {
+  const { slug } = event.queryStringParameters || {}
+  const current = await dilemmasStore().get(slug, { type: 'json' })
+  if (!current) return { statusCode: 404, body: 'Dilemma not found' }
+
+  const all = await listAllDilemmas()
+  const earlier = visibleDilemmas(all).filter(
+    (d) => new Date(d.date) < new Date(current.date)
+  )
+  const [next] = sortedByDateDesc(earlier)
+  if (!next) {
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ end: true }),
+    }
   }
   return {
     statusCode: 200,
-    body: JSON.stringify(next)
+    body: JSON.stringify(next),
   }
 }

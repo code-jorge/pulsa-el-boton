@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
-import { useMutation } from 'react-query'
+import { useState } from 'react'
+import { useMutation } from '@tanstack/react-query'
 import { TextField, FormControl, Select, MenuItem, InputLabel, Autocomplete, Stack, FormHelperText } from '@mui/material'
-import DateTimePicker from '@mui/lab/DateTimePicker'
+import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
 import Button from '../../components/Button/Button'
 import PageContent from '../../layout/PageContent/PageContent'
 import { addDilemma } from '../../utils/api'
@@ -19,10 +19,10 @@ const EMPTY_DILEMMA = {
   positive: '',
   negative: '',
   slug: '',
-  code: ''
+  code: '',
 }
 
-const TextInput = ({ label, value, onChange, type='text', error='' })=> (
+const TextInput = ({ label, value, onChange, type = 'text', error = '' }) => (
   <TextField
     type={type}
     className={styles.input}
@@ -34,9 +34,9 @@ const TextInput = ({ label, value, onChange, type='text', error='' })=> (
   />
 )
 
-const SelectInput = ({ label, value, onChange, options, error='' })=> (
-  <FormControl 
-    variant="outlined"
+const SelectInput = ({ label, value, onChange, options, error = '' }) => (
+  <FormControl
+    variant='outlined'
     className={styles.input}
   >
     <InputLabel id={`${label}-label`}>{label}</InputLabel>
@@ -46,7 +46,7 @@ const SelectInput = ({ label, value, onChange, options, error='' })=> (
       onChange={onChange}
       label={label}
     >
-      {options.map(option=> (
+      {options.map(option => (
         <MenuItem key={option.value} value={option.value}>{option.label}</MenuItem>
       ))}
     </Select>
@@ -55,7 +55,7 @@ const SelectInput = ({ label, value, onChange, options, error='' })=> (
   </FormControl>
 )
 
-const checkFields = (dilemma)=> {
+const checkFields = (dilemma) => {
   const errors = []
   if (!dilemma.title) errors.push({ field: 'title', message: 'El título es obligatorio' })
   if (!dilemma.category) errors.push({ field: 'category', message: 'La categoría es obligatoria' })
@@ -67,7 +67,7 @@ const checkFields = (dilemma)=> {
   return errors
 }
 
-const CreateDilemma = ()=> {
+const CreateDilemma = () => {
 
   const notifications = useNotification()
 
@@ -77,52 +77,50 @@ const CreateDilemma = ()=> {
 
   const [buttonState, setButtonState] = useState('opened')
 
-  const submitDilemma = useMutation(addDilemma)
+  const submitDilemma = useMutation({ mutationFn: addDilemma })
 
-  const handleUpdate = (field, value)=> {
-    // Clear the error if it existed
-    if (errors.find(error=> error.field === field)) {
-      setErrors(errors.filter(error=> error.field !== field))
+  const handleUpdate = (field, value) => {
+    if (errors.find(error => error.field === field)) {
+      setErrors(errors.filter(error => error.field !== field))
     }
-    setDilemma(c=> ({ ...c, [field]: value }))
+    setDilemma(c => ({ ...c, [field]: value }))
   }
 
-  const handleClick = ()=> {
-    const errors = checkFields(dilemma)
-    if (errors.length) {
-      setErrors(errors)
+  const handleClick = () => {
+    const validationErrors = checkFields(dilemma)
+    if (validationErrors.length) {
+      setErrors(validationErrors)
       notifications.error({ title: 'Datos incorrectos', message: 'Por favor revisa el formulario' })
       return
     }
     const form = {
       ...dilemma,
-      date: formatDate(dilemma.date)
+      date: formatDate(dilemma.date),
     }
     submitDilemma.mutate(form, {
-      onSuccess: ()=> {
+      onSuccess: () => {
         notifications.success({ title: 'Dilema creado', message: 'El dilema se ha creado correctamente' })
         setDilemma(EMPTY_DILEMMA)
       },
-      onError: ()=> {
+      onError: () => {
         notifications.error({ title: 'Error', message: 'Ha ocurrido un error al crear el dilema' })
-      }
+      },
     })
   }
 
-  const getErrorMessage = (field)=> {
-    return errors.find(error=> error.field === field)?.message || ''
+  const getErrorMessage = (field) => {
+    return errors.find(error => error.field === field)?.message || ''
   }
 
   return (
-    <PageContent 
-      loading={[submitDilemma.isLoading]} 
+    <PageContent
+      loading={[submitDilemma.isPending]}
       errors={[submitDilemma.isError]}
     >
       <div className={styles.main}>
         <Stack spacing={3}>
           <DateTimePicker
-            renderInput={(props) => <TextField {...props} />}
-            label="Fecha publicación"
+            label='Fecha publicación'
             value={dilemma.date}
             onChange={d => handleUpdate('date', d)}
           />
@@ -130,25 +128,25 @@ const CreateDilemma = ()=> {
             label='Título'
             value={dilemma.title}
             error={getErrorMessage('title')}
-            onChange={e=> handleUpdate('title', e.target.value)}
+            onChange={e => handleUpdate('title', e.target.value)}
           />
           <TextInput
             label='URL'
             value={dilemma.slug}
             error={getErrorMessage('slug')}
-            onChange={e=> handleUpdate('slug', e.target.value)}
+            onChange={e => handleUpdate('slug', e.target.value)}
           />
           <section className={styles.section}>
             <SelectInput
               label='Tipo'
               value={dilemma.type}
-              onChange={e=> handleUpdate('type', e.target.value)}
+              onChange={e => handleUpdate('type', e.target.value)}
               options={DILEMMA_TYPES}
             />
             <SelectInput
               label='Categoría'
               value={dilemma.category}
-              onChange={e=> handleUpdate('category', e.target.value)}
+              onChange={e => handleUpdate('category', e.target.value)}
               error={getErrorMessage('category')}
               options={DILEMMA_CATEGORIES}
             />
@@ -159,13 +157,13 @@ const CreateDilemma = ()=> {
             className={styles.input}
             options={[]}
             value={dilemma.tags}
-            onChange={(_e, value)=> handleUpdate('tags', value)}
-            renderInput={(params)=> (
-              <TextField 
-                {...params} 
-                variant="outlined" 
-                label="Etiquetas" 
-                helperText={getErrorMessage('tags')} 
+            onChange={(_e, value) => handleUpdate('tags', value)}
+            renderInput={(params) => (
+              <TextField
+                {...params}
+                variant='outlined'
+                label='Etiquetas'
+                helperText={getErrorMessage('tags')}
               />
             )}
           />
@@ -173,29 +171,29 @@ const CreateDilemma = ()=> {
             label='Parte positiva'
             value={dilemma.positive}
             error={getErrorMessage('positive')}
-            onChange={e=> handleUpdate('positive', e.target.value)}
+            onChange={e => handleUpdate('positive', e.target.value)}
           />
           <TextInput
             label='Parte negativa'
             value={dilemma.negative}
             error={getErrorMessage('negative')}
-            onChange={e=> handleUpdate('negative', e.target.value)}
+            onChange={e => handleUpdate('negative', e.target.value)}
           />
           <TextInput
             type='password'
             label='Código verificación'
             value={dilemma.code}
             error={getErrorMessage('code')}
-            onChange={e=> handleUpdate('code', e.target.value)}
+            onChange={e => handleUpdate('code', e.target.value)}
           />
         </Stack>
-        <Button 
+        <Button
           className={styles.button}
           type={buttonState}
-          onMouseEnter={()=> setButtonState('opened')}
-          onMouseLeave={()=> setButtonState('closed')}
-          onMouseDown={()=> setButtonState('pressed')}
-          onMouseUp={()=> setButtonState('opened')}
+          onMouseEnter={() => setButtonState('opened')}
+          onMouseLeave={() => setButtonState('closed')}
+          onMouseDown={() => setButtonState('pressed')}
+          onMouseUp={() => setButtonState('opened')}
           onClick={handleClick}
         />
       </div>

@@ -1,15 +1,10 @@
-const connect = require('../utils/connect')
+const { listAllDilemmas, sortedByDateDesc, visibleDilemmas } = require('../utils/store')
 
-exports.handler = async (event, context)=> {
-  const db = await connect()
-  const now = new Date()
-  const [ dilemma ] = await db.collection("dilemmas")
-    .find({ date: { $lte: now } })
-    .sort({ date: -1 })
-    .limit(1)
-    .toArray()
+exports.handler = async () => {
+  const all = await listAllDilemmas()
+  const [dilemma] = sortedByDateDesc(visibleDilemmas(all))
   return {
     statusCode: 200,
-    body: JSON.stringify(dilemma)
+    body: JSON.stringify(dilemma || null),
   }
 }

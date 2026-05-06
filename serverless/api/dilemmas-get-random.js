@@ -1,17 +1,14 @@
-const connect = require('../utils/connect')
+const { listAllDilemmas, visibleDilemmas } = require('../utils/store')
 
-exports.handler = async (event, context)=> {
-  const db = await connect()
-  const now = new Date()
-  const total = await db.collection("dilemmas").countDocuments({ date: { $lte: now } })
-  const skip = Math.floor(Math.random() * (total-1))
-  const [ dilemma ] = await db.collection("dilemmas")
-    .find({ date: { $lte: now } })
-    .skip(skip)
-    .limit(1)
-    .toArray()
+exports.handler = async () => {
+  const all = await listAllDilemmas()
+  const visible = visibleDilemmas(all)
+  if (visible.length === 0) {
+    return { statusCode: 200, body: JSON.stringify(null) }
+  }
+  const dilemma = visible[Math.floor(Math.random() * visible.length)]
   return {
     statusCode: 200,
-    body: JSON.stringify(dilemma)
+    body: JSON.stringify(dilemma),
   }
 }

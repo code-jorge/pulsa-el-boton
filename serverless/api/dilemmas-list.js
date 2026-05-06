@@ -1,18 +1,15 @@
-const connect = require('../utils/connect')
+const { listAllDilemmas, sortedByDateDesc, visibleDilemmas } = require('../utils/store')
 
 const PAGE_SIZE = 60
 
-exports.handler = async (event, context)=> {
-  const db = await connect()
-  const { page } = event.queryStringParameters
-  const now = new Date()
-  const data = await db.collection("dilemmas")
-    .find({ date: { $lte: now } })
-    .limit(PAGE_SIZE)
-    .skip(PAGE_SIZE*(page-1))
-    .toArray()
+exports.handler = async (event) => {
+  const page = Number(event.queryStringParameters?.page || 1)
+  const all = await listAllDilemmas()
+  const ordered = sortedByDateDesc(visibleDilemmas(all))
+  const start = PAGE_SIZE * (page - 1)
+  const dilemmas = ordered.slice(start, start + PAGE_SIZE)
   return {
     statusCode: 200,
-    body: JSON.stringify({ dilemmas: data })
+    body: JSON.stringify({ dilemmas }),
   }
 }
