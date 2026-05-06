@@ -1,10 +1,11 @@
-const { listAllDilemmas, visibleDilemmas } = require('../utils/store')
+import { listAllDilemmas, visibleDilemmas } from '../utils/store.js'
 
-exports.handler = async () => {
+export default async () => {
   const all = await listAllDilemmas()
-  const total = visibleDilemmas(all).length
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ total }),
-  }
+  return Response.json({ total: visibleDilemmas(all).length })
+}
+
+export const config = {
+  path: '/api/dilemmas-count',
+  method: 'GET',
 }

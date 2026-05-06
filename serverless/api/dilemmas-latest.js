@@ -1,10 +1,11 @@
-const { listAllDilemmas, sortedByDateDesc, visibleDilemmas } = require('../utils/store')
+import { listAllDilemmas, sortedByDateDesc, visibleDilemmas } from '../utils/store.js'
 
-exports.handler = async () => {
-  const all = await listAllDilemmas()
-  const [dilemma] = sortedByDateDesc(visibleDilemmas(all))
-  return {
-    statusCode: 200,
-    body: JSON.stringify(dilemma || null),
-  }
+export default async () => {
+  const [dilemma] = sortedByDateDesc(visibleDilemmas(await listAllDilemmas()))
+  return Response.json(dilemma || null)
+}
+
+export const config = {
+  path: '/api/dilemmas-latest',
+  method: 'GET',
 }

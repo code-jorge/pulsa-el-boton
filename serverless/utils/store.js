@@ -1,27 +1,19 @@
-const { getStore } = require('@netlify/blobs')
+import { getStore } from '@netlify/blobs'
 
-const dilemmasStore = () => getStore({ name: 'dilemmas', consistency: 'strong' })
-const votesStore = () => getStore({ name: 'votes', consistency: 'strong' })
+export const dilemmasStore = () => getStore({ name: 'dilemmas', consistency: 'strong' })
+export const votesStore = () => getStore({ name: 'votes', consistency: 'strong' })
 
-const listAllDilemmas = async () => {
+export const listAllDilemmas = async () => {
   const store = dilemmasStore()
   const { blobs } = await store.list()
   const items = await Promise.all(
-    blobs.map((blob) => store.get(blob.key, { type: 'json' }))
+    blobs.map((blob) => store.get(blob.key, { type: 'json' })),
   )
   return items.filter(Boolean)
 }
 
-const visibleDilemmas = (items, now = new Date()) =>
+export const visibleDilemmas = (items, now = new Date()) =>
   items.filter((item) => new Date(item.date) <= now)
 
-const sortedByDateDesc = (items) =>
+export const sortedByDateDesc = (items) =>
   [...items].sort((a, b) => new Date(b.date) - new Date(a.date))
-
-module.exports = {
-  dilemmasStore,
-  votesStore,
-  listAllDilemmas,
-  visibleDilemmas,
-  sortedByDateDesc,
-}

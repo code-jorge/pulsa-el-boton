@@ -1,15 +1,15 @@
-const { listAllDilemmas, sortedByDateDesc, visibleDilemmas } = require('../utils/store')
+import { listAllDilemmas, sortedByDateDesc, visibleDilemmas } from '../utils/store.js'
 
 const PAGE_SIZE = 60
 
-exports.handler = async (event) => {
-  const page = Number(event.queryStringParameters?.page || 1)
-  const all = await listAllDilemmas()
-  const ordered = sortedByDateDesc(visibleDilemmas(all))
+export default async (req) => {
+  const page = Number(new URL(req.url).searchParams.get('page') || 1)
+  const ordered = sortedByDateDesc(visibleDilemmas(await listAllDilemmas()))
   const start = PAGE_SIZE * (page - 1)
-  const dilemmas = ordered.slice(start, start + PAGE_SIZE)
-  return {
-    statusCode: 200,
-    body: JSON.stringify({ dilemmas }),
-  }
+  return Response.json({ dilemmas: ordered.slice(start, start + PAGE_SIZE) })
+}
+
+export const config = {
+  path: '/api/dilemmas-list',
+  method: 'GET',
 }
