@@ -31,6 +31,13 @@ const TextInput = ({ label, value, onChange, type = 'text', error = '' }) => (
     value={value}
     onChange={onChange}
     helperText={error}
+    autoComplete='off'
+    inputProps={{
+      autoComplete: 'off',
+      autoCorrect: 'off',
+      autoCapitalize: 'off',
+      spellCheck: 'false',
+    }}
   />
 )
 
@@ -102,8 +109,11 @@ const CreateDilemma = () => {
         notifications.success({ title: 'Dilema creado', message: 'El dilema se ha creado correctamente' })
         setDilemma(EMPTY_DILEMMA)
       },
-      onError: () => {
-        notifications.error({ title: 'Error', message: 'Ha ocurrido un error al crear el dilema' })
+      onError: (err) => {
+        notifications.error({
+          title: 'Error',
+          message: err?.message || 'Ha ocurrido un error al crear el dilema',
+        })
       },
     })
   }
@@ -166,6 +176,14 @@ const CreateDilemma = () => {
                 variant='outlined'
                 label='Etiquetas'
                 helperText={getErrorMessage('tags')}
+                autoComplete='off'
+                inputProps={{
+                  ...params.inputProps,
+                  autoComplete: 'off',
+                  autoCorrect: 'off',
+                  autoCapitalize: 'off',
+                  spellCheck: 'false',
+                }}
               />
             )}
           />

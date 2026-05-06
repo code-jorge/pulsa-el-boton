@@ -1,58 +1,45 @@
-export const getTotalDilemmas = ()=> {
-  const url = '/api/dilemmas-count'
-  return fetch(url)
-    .then(res=> res.json())
-    .then(({ total })=> total)
+const request = async (url, options) => {
+  const res = await fetch(url, options)
+  if (!res.ok) {
+    const message = await res.text().catch(() => '')
+    throw new Error(message || `Request failed with status ${res.status}`)
+  }
+  return res
 }
 
-export const getDilemmasList = (page)=> {
-  const url = `/api/dilemmas-list?page=${page}`
-  return fetch(url).then(res=> res.json())
-}
+const requestJSON = (url, options) => request(url, options).then(res => res.json())
 
-export const getDilemma = (slug)=> {
-  const url = `/api/dilemmas-get?slug=${slug}`
-  return fetch(url).then(res=> res.json())
-}
+export const getTotalDilemmas = () =>
+  requestJSON('/api/dilemmas-count').then(({ total }) => total)
 
-export const getDilemmaRandom = ()=> {
-  const url = `/api/dilemmas-get-random`
-  return fetch(url).then(res=> res.json())
-}
+export const getDilemmasList = (page) =>
+  requestJSON(`/api/dilemmas-list?page=${page}`)
 
-export const getNextDilemma = (slug)=> {
-  const url = `/api/dilemmas-next?slug=${slug}`
-  return fetch(url).then(res=> res.json())
-}
+export const getDilemma = (slug) =>
+  requestJSON(`/api/dilemmas-get?slug=${encodeURIComponent(slug)}`)
 
-export const getLatestDilemma = ()=> {
-  const url = '/api/dilemmas-latest'
-  return fetch(url).then(res=> res.json())
-}
+export const getDilemmaRandom = () =>
+  requestJSON('/api/dilemmas-get-random')
 
-export const getVotes = (slug)=> {
-  const url = `/api/votes-get?slug=${slug}`
-  return fetch(url).then(res=> res.json())
-}
+export const getNextDilemma = (slug) =>
+  requestJSON(`/api/dilemmas-next?slug=${encodeURIComponent(slug)}`)
 
-export const addVote = ({ choice, dilemma })=> {
-  const url = '/api/votes-add'
-  return fetch(url, {
+export const getLatestDilemma = () =>
+  requestJSON('/api/dilemmas-latest')
+
+export const getVotes = (slug) =>
+  requestJSON(`/api/votes-get?slug=${encodeURIComponent(slug)}`)
+
+export const addVote = ({ choice, dilemma }) =>
+  request('/api/votes-add', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({ choice, dilemma })
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ choice, dilemma }),
   })
-}
 
-export const addDilemma = (dilemma)=> {
-  const url = '/api/dilemmas-add'
-  return fetch(url, {
+export const addDilemma = (dilemma) =>
+  request('/api/dilemmas-add', {
     method: 'POST',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(dilemma)
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(dilemma),
   })
-}
