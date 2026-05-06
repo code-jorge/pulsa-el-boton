@@ -1,5 +1,4 @@
 import { dilemmasStore } from '../utils/store.js'
-import { parseDate } from '../utils/date.js'
 
 export default async (req) => {
   const { title, date, type, category, tags, positive, negative, slug, code } = await req.json()
@@ -7,6 +6,11 @@ export default async (req) => {
     return new Response('Unauthorized', { status: 401 })
   }
   if (!slug) return new Response('Missing slug', { status: 400 })
+
+  const parsed = new Date(date)
+  if (Number.isNaN(parsed.getTime())) {
+    return new Response('Invalid date', { status: 400 })
+  }
 
   const store = dilemmasStore()
   const existing = await store.get(slug, { type: 'json' })
@@ -20,7 +24,7 @@ export default async (req) => {
     positive,
     negative,
     slug,
-    date: parseDate(date).toISOString(),
+    date: parsed.toISOString(),
   })
   return new Response(null, { status: 204 })
 }

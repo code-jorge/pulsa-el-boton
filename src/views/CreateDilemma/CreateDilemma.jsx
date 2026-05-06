@@ -9,7 +9,6 @@ import { addDilemma } from '../../utils/api'
 import styles from './CreateDilemma.module.css'
 import { DILEMMA_CATEGORIES, DILEMMA_TYPES } from '../../utils/constants'
 import { useNotification } from '../../components/NotificationManager/NotificationManager'
-import { formatDate } from '../../utils/date'
 
 const EMPTY_DILEMMA = {
   date: DateTime.now(),
@@ -96,7 +95,7 @@ const CreateDilemma = () => {
     }
     const form = {
       ...dilemma,
-      date: formatDate(dilemma.date),
+      date: dilemma.date.toUTC().toISO(),
     }
     submitDilemma.mutate(form, {
       onSuccess: () => {
@@ -124,6 +123,8 @@ const CreateDilemma = () => {
             label='Fecha publicación'
             value={dilemma.date}
             onChange={d => handleUpdate('date', d)}
+            ampm={false}
+            format='dd/MM/yyyy HH:mm'
           />
           <TextInput
             label='Título'

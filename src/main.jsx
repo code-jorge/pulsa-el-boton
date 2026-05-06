@@ -18,7 +18,7 @@ createRoot(document.getElementById('root')).render(
       <StyledEngineProvider injectFirst>
         <ThemeProvider theme={theme}>
           <QueryClientProvider client={queryClient}>
-            <LocalizationProvider dateAdapter={AdapterLuxon}>
+            <LocalizationProvider dateAdapter={AdapterLuxon} adapterLocale='es'>
               <NotificationManager>
                 <App />
               </NotificationManager>
