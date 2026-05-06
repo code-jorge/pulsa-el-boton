@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { useMutation } from '@tanstack/react-query'
 import { TextField, FormControl, Select, MenuItem, InputLabel, Autocomplete, Stack, FormHelperText } from '@mui/material'
 import { DateTimePicker } from '@mui/x-date-pickers/DateTimePicker'
+import { DateTime } from 'luxon'
 import Button from '../../components/Button/Button'
 import PageContent from '../../layout/PageContent/PageContent'
 import { addDilemma } from '../../utils/api'
@@ -11,7 +12,7 @@ import { useNotification } from '../../components/NotificationManager/Notificati
 import { formatDate } from '../../utils/date'
 
 const EMPTY_DILEMMA = {
-  date: new Date(),
+  date: DateTime.now(),
   title: '',
   type: 'classic',
   category: '',
